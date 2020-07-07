@@ -1,0 +1,109 @@
+env:
+  browser: true
+  es2020: true
+extends:
+  - 'eslint:recommended'
+  - 'plugin:react/recommended'
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 11
+  sourceType: module
+plugins:
+  - react
+rules:
+  indent:
+    - error
+    - 2
+    - SwitchCase: 1
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - never
+  no-console:
+    - warn
+    - allow:
+        - error
+  no-unused-vars:
+    - warn
+    - vars: all
+      args: after-used
+      ignoreRestSiblings: false
+  keyword-spacing:
+    - error
+    - after: true
+  eqeqeq:
+    - error
+    - always
+  space-infix-ops:
+    - error
+    - int32Hint: false
+  comma-spacing:
+    - warn
+    - before: false
+      after: true
+  brace-style: error
+  curly:
+    - error
+    - multi-line
+  no-multiple-empty-lines:
+    - error
+    - max: 2
+      maxEOF: 0
+      maxBOF: 0
+  operator-linebreak:
+    - error
+    - before
+  no-cond-assign: error
+  block-spacing: error
+  camelcase:
+    - error
+    - properties: always
+  comma-style:
+    - error
+    - last
+  dot-location:
+    - error
+    - property
+  func-call-spacing: error
+  key-spacing:
+    - error
+    - beforeColon: false
+  new-cap:
+    - error
+    - newIsCap: false
+  new-parens: error
+  no-debugger: warn
+  no-dupe-args: error
+  no-dupe-keys: error
+  no-duplicate-case: error
+  no-fallthrough: error
+  no-func-assign: error
+  no-inner-declarations: error
+  no-ex-assign: error
+  no-return-assign: error
+  no-self-assign: error
+  no-sparse-arrays: error
+  no-template-curly-in-string: error
+  no-this-before-super: error
+  no-throw-literal: warn
+  no-undef-init: error
+  no-whitespace-before-property: error
+  object-property-newline: error
+  padded-blocks: 
+    - error
+    - never
+  semi-spacing: error
+  space-before-blocks: error
+  spaced-comment: error
+  template-curly-spacing: 
+    - error
+    - never
+  use-isnan: error
+  valid-typeof: error
+  wrap-iife: error
