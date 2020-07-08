@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
 
@@ -7,9 +7,16 @@ export function ZoneCheckbox({ zone, isSelected = false, onChangeStatusZone }) {
     const checked = e.target.checked
     onChangeStatusZone(zone, checked)
   }
+  const displayZone = useMemo(() => {
+    const words = zone.split('/')
+    if (words.length < 2) {
+      return zone
+    }
+    return `${words[0]}/${words[words.length - 1]}`
+  }, [zone])
   return (
     <Checkbox checked={isSelected} onChange={onChange}>
-      {zone}
+      {displayZone}
     </Checkbox>
   )
 }
