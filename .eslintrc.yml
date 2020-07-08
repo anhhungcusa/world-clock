@@ -61,7 +61,7 @@ rules:
       maxBOF: 0
   operator-linebreak:
     - warn
-    - before
+    - after
   no-cond-assign: warn
   block-spacing: warn
   camelcase:
