@@ -8,7 +8,7 @@ const initState = {
   selectedZones: null,
   clickedZone: null,
 }
-export const DataContext = createContext(initState)
+export const DataContext = createContext({state: initState})
 
 export function DataProvider({ children }) {
   const [state, setState] = useState(initState)
