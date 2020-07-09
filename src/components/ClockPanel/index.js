@@ -36,8 +36,9 @@ export function ClockPanel() {
       filteredZones = Object.keys(selectedZones || {})
     }
     filteredZones = filteredZones.filter(zone => {
-      const search = filter.text.trim()
-      return zone.toLowerCase().includes(search.toLowerCase())
+      const search = filter.text.trim().replace(/\s+/g, '')
+      const source = zone.toLowerCase().replace(/_/g, '')
+      return source.includes(search.toLowerCase())
     })
     setDisplayZones(filteredZones)
   }
