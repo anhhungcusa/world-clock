@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import './App.css'
 import 'antd/dist/antd.css'
 import { DataProvider } from './context'
-import { Header, ClockPanel } from './components'
+import { Header, ClockPanel, ClockList } from './components'
 import { Button, Drawer } from 'antd'
 function App() {
-  const [isVisibleClockPanel, setIsVisibleClockPanel] = useState(true)
+  const [isVisibleClockPanel, setIsVisibleClockPanel] = useState(false)
   const openPanel = () => {
     setIsVisibleClockPanel(true)
   }
@@ -15,7 +15,7 @@ function App() {
   return (
     <div className='App'>
       <DataProvider>
-        <Header title='Work Clock' />
+        <Header title='World Clock' />
         <div className='container-fluid'>
           <Button onClick={openPanel}>Select Clocks</Button>
           <Drawer
@@ -28,6 +28,7 @@ function App() {
           >
             <ClockPanel />
           </Drawer>
+          <ClockList />          
         </div>
       </DataProvider>
     </div>
