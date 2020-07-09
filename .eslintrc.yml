@@ -1,9 +1,11 @@
 env:
   browser: true
+  node: true
   es2020: true
 extends:
   - 'eslint:recommended'
   - 'plugin:react/recommended'
+  - "plugin:react-hooks/recommended"
 parserOptions:
   ecmaFeatures:
     jsx: true
@@ -11,19 +13,20 @@ parserOptions:
   sourceType: module
 plugins:
   - react
+  - react-hooks
 rules:
   indent:
-    - error
+    - warn
     - 2
     - SwitchCase: 1
   linebreak-style:
-    - error
+    - warn
     - unix
   quotes:
-    - error
+    - warn
     - single
   semi:
-    - error
+    - warn
     - never
   no-console:
     - warn
@@ -35,75 +38,76 @@ rules:
       args: after-used
       ignoreRestSiblings: false
   keyword-spacing:
-    - error
+    - warn
     - after: true
   eqeqeq:
     - error
     - always
   space-infix-ops:
-    - error
+    - warn
     - int32Hint: false
   comma-spacing:
     - warn
     - before: false
       after: true
-  brace-style: error
+  brace-style: warn
   curly:
-    - error
+    - warn
     - multi-line
   no-multiple-empty-lines:
-    - error
+    - warn
     - max: 2
       maxEOF: 0
       maxBOF: 0
   operator-linebreak:
-    - error
-    - before
-  no-cond-assign: error
-  block-spacing: error
+    - warn
+    - after
+  no-cond-assign: warn
+  block-spacing: warn
   camelcase:
-    - error
+    - warn
     - properties: always
   comma-style:
-    - error
+    - warn
     - last
   dot-location:
-    - error
+    - warn
     - property
-  func-call-spacing: error
+  func-call-spacing: warn
   key-spacing:
-    - error
+    - warn
     - beforeColon: false
-  new-cap:
-    - error
-    - newIsCap: false
-  new-parens: error
+  new-parens: warn
   no-debugger: warn
   no-dupe-args: error
   no-dupe-keys: error
   no-duplicate-case: error
-  no-fallthrough: error
+  no-fallthrough: warn
   no-func-assign: error
   no-inner-declarations: error
   no-ex-assign: error
   no-return-assign: error
   no-self-assign: error
-  no-sparse-arrays: error
-  no-template-curly-in-string: error
+  no-sparse-arrays: warn
+  no-template-curly-in-string: warn
   no-this-before-super: error
-  no-throw-literal: warn
+  no-throw-literal: error
   no-undef-init: error
-  no-whitespace-before-property: error
-  object-property-newline: error
+  no-whitespace-before-property: warn
+  object-property-newline: 
+    - warn
+    - allowAllPropertiesOnSameLine: true
   padded-blocks: 
-    - error
+    - warn
     - never
-  semi-spacing: error
-  space-before-blocks: error
-  spaced-comment: error
+  semi-spacing: warn
+  space-before-blocks: warn
+  spaced-comment: warn
   template-curly-spacing: 
-    - error
+    - warn
     - never
   use-isnan: error
   valid-typeof: error
-  wrap-iife: error
+  wrap-iife: warn
+  react-hooks/rules-of-hooks: error
+  react-hooks/exhaustive-deps: warn
