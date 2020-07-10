@@ -2,22 +2,25 @@ import React, { useState } from 'react'
 import './App.css'
 import 'antd/dist/antd.css'
 import { DataProvider } from './context'
-import { Header, ClockPanel } from './components'
-import { Button, Drawer } from 'antd'
+import { Header, ClockPanel, ClockList } from './components'
+import { Drawer } from 'antd'
+import { useScroll } from './hooks'
 function App() {
-  const [isVisibleClockPanel, setIsVisibleClockPanel] = useState(true)
+  const [isVisibleClockPanel, setIsVisibleClockPanel] = useState(false)
+  const bodyScroll = useScroll(document.body)
   const openPanel = () => {
+    bodyScroll.hidden()
     setIsVisibleClockPanel(true)
   }
   const closePanel = () => {
+    bodyScroll.show()
     setIsVisibleClockPanel(false)
   }
   return (
     <div className='App'>
       <DataProvider>
-        <Header title='Work Clock' />
+        <Header title='WORD CLOCK' />
         <div className='container-fluid'>
-          <Button onClick={openPanel}>Select Clocks</Button>
           <Drawer
             height='70vh'
             title='Clock Panel'
@@ -28,6 +31,7 @@ function App() {
           >
             <ClockPanel />
           </Drawer>
+          <ClockList openPanel={openPanel} />          
         </div>
       </DataProvider>
     </div>

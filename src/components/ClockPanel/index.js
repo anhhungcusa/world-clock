@@ -1,7 +1,13 @@
-import React, { useContext, useState, useEffect, useCallback, useMemo } from 'react'
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from 'react'
 import './style.css'
 import { DataContext } from '../../context'
-import { Input, Space, Checkbox, Button, message, Row, Col, Divider } from 'antd'
+import { Input, Checkbox, Button, message, Row, Col, Divider } from 'antd'
 import { ZoneCheckboxMemorized } from '../'
 
 export function ClockPanel() {
@@ -10,10 +16,12 @@ export function ClockPanel() {
     actions: { addSelectedZone, removeSelectedZone, resetSelectedZones },
   } = useContext(DataContext)
   const [displayZones, setDisplayZones] = useState(null)
-  const [filter, setFilter] = useState({ text: '', isShowSelectedZones: false })
-  const [isFiltering, setIsFiltering] = useState(false)
+  const [filter, setFilter] = useState({
+    text: '',
+    isShowSelectedZones: false,
+  })
   const onChangeFilter = (key, value) => {
-    setFilter((filter) => ({ ...filter, [key]: value }))
+    setFilter(filter => ({ ...filter, [key]: value }))
   }
   useEffect(() => {
     if (zones) {
@@ -23,20 +31,16 @@ export function ClockPanel() {
 
   const onFilterZones = (isShowSelectedZones = false) => {
     if (!zones) return message.warn('Zones is empty')
-    const search = filter.text.trim()
-    if (search === '') return message.warn('You should be enter the zone')
-    setIsFiltering(true)
     let filteredZones = zones.slice()
     if (isShowSelectedZones) {
       filteredZones = Object.keys(selectedZones || {})
     }
-    filteredZones = filteredZones.filter((zone) => {
-      const search = filter.text.trim()
-      return zone.toLowerCase().includes(search.toLowerCase())
+    filteredZones = filteredZones.filter(zone => {
+      const search = filter.text.trim().replace(/\s+/g, '')
+      const source = zone.toLowerCase().replace(/_/g, '')
+      return source.includes(search.toLowerCase())
     })
-
     setDisplayZones(filteredZones)
-    setIsFiltering(false)
   }
 
   useEffect(() => {
@@ -51,7 +55,7 @@ export function ClockPanel() {
     setDisplayZones(zones)
   }
 
-  const onChangeShowSelectedZones = (e) => {
+  const onChangeShowSelectedZones = e => {
     const checked = e.target.checked
     onChangeFilter(e.target.name, e.target.checked)
     onFilterZones(checked)
@@ -73,35 +77,35 @@ export function ClockPanel() {
   }, [selectedZones])
 
   return (
-    <Space className='clock-panel' direction='vertical'>
-      <div className='filter-panel'>
+    <div className="clock-panel">
+      <div className="filter-panel">
         <div>
           <Input.Search
-            loading={isFiltering}
-            name='text'
+            name="text"
             value={filter.text}
             onChange={({ target: { value, name } }) =>
               onChangeFilter(name, value)
             }
             onSearch={() => onFilterZones(filter.isShowSelectedZones)}
-            placeholder='enter the zone'
+            placeholder="enter a zone"
           />
-
         </div>
         <Checkbox
-          name='isShowSelectedZones'
+          name="isShowSelectedZones"
           onChange={onChangeShowSelectedZones}
           checked={filter.isShowSelectedZones}
         >
           show selected zones
         </Checkbox>
         <Button onClick={onResetFilter}>Reset</Button>
-        <Button disabled={isDisableDeselect} onClick={resetSelectedZones}>Deselect All</Button>
+        <Button disabled={isDisableDeselect} onClick={resetSelectedZones}>
+          Deselect All
+        </Button>
       </div>
       <Divider />
-      <Row direction='horizontal' size='middle'>
+      <Row direction="horizontal" size="middle">
         {displayZones &&
-          displayZones.map((value) => (
+          displayZones.map(value => (
             <Col key={value} span={24} xs={12} md={8} lg={6} xl={4} xxl={2}>
               <ZoneCheckboxMemorized
                 zone={value}
@@ -111,6 +115,6 @@ export function ClockPanel() {
             </Col>
           ))}
       </Row>
-    </Space>
+    </div>
   )
 }

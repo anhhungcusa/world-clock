@@ -28,9 +28,3 @@ ZoneCheckbox.propTypes = {
   isSelected: PropTypes.bool,
   onChangeStatusZone: PropTypes.func.isRequired,
 }
-
-ZoneCheckboxMemorized.propTypes = {
-  zone: PropTypes.string.isRequired,
-  isSelected: PropTypes.bool,
-  onChangeStatusZone: PropTypes.func.isRequired,
-}

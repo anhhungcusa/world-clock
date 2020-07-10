@@ -16,7 +16,7 @@ export function DataProvider({ children }) {
   useEffect(() => {
     import('moment-timezone/data/meta/latest.json')
       .then(data => {
-        const zones = Object.keys(data.zones)
+        const zones = Object.keys(data.zones).sort()
         setZones(zones)
       })
     const data = LocalStorageUtil.getItem(env.STORAGE_KEY)
