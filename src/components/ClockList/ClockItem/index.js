@@ -31,6 +31,7 @@ export function ClockItem({ zone, removeSelectedZone, openClockModal }) {
   return (
     <Card
       onClick={onClickCard}
+      style={{minHeight: '50vh'}}
       hoverable={true}
       title={displayZone + (time ? time.format(' - DD/MM/YYYY') : '')}
       loading={time === null ? true : false}
