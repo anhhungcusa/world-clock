@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import './style.css'
 import { DrawLockUtil } from '../../utils'
@@ -8,7 +8,7 @@ export function TraditionalClock({
   timeFormat = 'standard',
   hourFormat = 'standard',
 }) {
-  const [radius, setRadius] = useState(size / 2)
+  const radius = useMemo(() => (size / 2) * 0.9, [size])
   const [drawingContext, setDrawingContext] = useState(null)
   const clockCanvasRef = useRef()
 
@@ -19,11 +19,10 @@ export function TraditionalClock({
   useEffect(() => {
     if (drawingContext === null) {
       setDrawingContext(clockCanvasRef.current.getContext('2d'))
-      setRadius(radius => radius * 0.9)
     } else {
       drawingContext.translate(size / 2, size / 2)
     }
-  }, [drawingContext, radius, size])
+  }, [drawingContext, size])
 
   useEffect(() => {
     if (drawingContext === null || time === null) return
@@ -48,8 +47,8 @@ export function TraditionalClock({
 export const TraditionalClockMemorized = React.memo(TraditionalClock)
 
 TraditionalClock.propTypes = {
-  time: PropTypes.object.isRequired,
-  size: PropTypes.number.isRequired,
-  timeFormat: PropTypes.oneOf(['standard', '24h']).isRequired,
-  hourFormat: PropTypes.oneOf(['roman', 'standard']).isRequired,
+  time: PropTypes.object,
+  size: PropTypes.number,
+  timeFormat: PropTypes.oneOf(['standard', '24h']),
+  hourFormat: PropTypes.oneOf(['roman', 'standard']),
 }
