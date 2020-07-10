@@ -1,19 +1,18 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import { DataContext } from '../../context'
 import { ClockItemMemorized } from '../'
 import { Row, Col, Button } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
-import {
-  Tooltip,
-} from 'react-tippy'
-import 'react-tippy/dist/tippy.css'
 import './style.css'
-export function ClockList({openPanel}) {
+import { ClockModal } from '../'
+import { useScroll } from '../../hooks'
+export function ClockList({ openPanel }) {
   const {
-    state: { selectedZones },
-    actions: {removeSelectedZone}
+    state: { selectedZones, clickedZone },
+    actions: { removeSelectedZone, setClickedZone, resetClickedZone },
   } = useContext(DataContext)
+  const bodyScroll = useScroll(document.body)
   const displayZones = useMemo(() => {
     if (selectedZones) {
       return Object.keys(selectedZones)
@@ -21,19 +20,30 @@ export function ClockList({openPanel}) {
     return null
   }, [selectedZones])
 
+  const [isOpenClockModal, setIsOpenClockModal] = useState(false)
+
+  const openModal = zone => {
+    bodyScroll.hidden()
+    setClickedZone(zone)
+    setIsOpenClockModal(true)
+  }
+  const closeModal = () => {
+    bodyScroll.show()
+    resetClickedZone()
+    setIsOpenClockModal(false)
+  }
+
   return (
     <div className="clock-list">
       <Row gutter={[10, 10]}>
         {displayZones &&
           displayZones.map(zone => (
             <Col key={zone} xs={24} sm={12} md={8} lg={6} xl={4}>
-              <Tooltip 
-                title="click to remove"
-                trigger="mouseenter"
-                followCursor={true}
-                size='small'>
-                <ClockItemMemorized removeSelectedZone={removeSelectedZone} zone={zone} />
-              </Tooltip>
+              <ClockItemMemorized
+                removeSelectedZone={removeSelectedZone}
+                zone={zone}
+                openClockModal={openModal}
+              />
             </Col>
           ))}
         <Col xs={24} sm={12} md={8} lg={6} xl={4}>
@@ -41,11 +51,16 @@ export function ClockList({openPanel}) {
             <PlusOutlined />
           </Button>
         </Col>
+        <ClockModal
+          visible={isOpenClockModal}
+          close={closeModal}
+          zone={clickedZone}
+        />
       </Row>
     </div>
   )
 }
 
 ClockList.propTypes = {
-  openPanel: PropTypes.func.isRequired
+  openPanel: PropTypes.func.isRequired,
 }
