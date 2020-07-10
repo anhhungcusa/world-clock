@@ -97,12 +97,11 @@ export function ClockPanel() {
         >
           show selected zones
         </Checkbox>
-        <Button onClick={onResetFilter}>Reset</Button>
+        <Button onClick={onResetFilter}>Reset Filter</Button>
         <Button disabled={isDisableDeselect} onClick={resetSelectedZones}>
           Deselect All
         </Button>
       </div>
-      <Divider />
       <Row direction="horizontal" size="middle">
         {displayZones &&
           displayZones.map(value => (
