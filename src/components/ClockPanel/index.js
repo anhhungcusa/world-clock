@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import './style.css'
 import { DataContext } from '../../context'
-import { Input, Checkbox, Button, message, Row, Col, Divider } from 'antd'
+import { Input, Checkbox, Button, message, Row, Col } from 'antd'
 import { ZoneCheckboxMemorized } from '../'
 
 export function ClockPanel() {
@@ -76,6 +76,12 @@ export function ClockPanel() {
     return false
   }, [selectedZones])
 
+  const onChangeSearch = ({ target: { value, name } }) => {
+    onChangeFilter(name, value)
+  }
+
+  const onSearch = () => onFilterZones(filter.isShowSelectedZones)
+
   return (
     <div className="clock-panel">
       <div className="filter-panel">
@@ -83,10 +89,8 @@ export function ClockPanel() {
           <Input.Search
             name="text"
             value={filter.text}
-            onChange={({ target: { value, name } }) =>
-              onChangeFilter(name, value)
-            }
-            onSearch={() => onFilterZones(filter.isShowSelectedZones)}
+            onChange={onChangeSearch}
+            onSearch={onSearch}
             placeholder="enter a zone"
           />
         </div>

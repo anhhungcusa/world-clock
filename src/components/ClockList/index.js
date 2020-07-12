@@ -6,13 +6,13 @@ import { PlusOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 import './style.css'
 import { ClockModal } from '../'
-import { useScroll } from '../../hooks'
+import { Scroll } from '../../utils'
 export function ClockList({ openPanel }) {
   const {
     state: { selectedZones, clickedZone },
     actions: { removeSelectedZone, setClickedZone, resetClickedZone },
   } = useContext(DataContext)
-  const bodyScroll = useScroll(document.body)
+  const bodyScroll = new Scroll(document.body)
   const displayZones = useMemo(() => {
     if (selectedZones) {
       return Object.keys(selectedZones)
