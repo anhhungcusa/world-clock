@@ -4,10 +4,10 @@ import 'antd/dist/antd.css'
 import { DataProvider } from './context'
 import { Header, ClockPanel, ClockList } from './components'
 import { Drawer } from 'antd'
-import { useScroll } from './hooks'
+import { Scroll } from './utils'
 function App() {
   const [isVisibleClockPanel, setIsVisibleClockPanel] = useState(false)
-  const bodyScroll = useScroll(document.body)
+  const bodyScroll = new Scroll(document.body)
   const openPanel = () => {
     bodyScroll.hidden()
     setIsVisibleClockPanel(true)
