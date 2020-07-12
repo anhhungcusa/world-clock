@@ -4,6 +4,7 @@ import { TraditionalClock } from '../../'
 import { Card } from 'antd'
 import moment from 'moment-timezone'
 import { CloseOutlined } from '@ant-design/icons'
+
 export function ClockItem({ zone, removeSelectedZone, openClockModal }) {
   const [time, setTime] = useState(null)
   const displayZone = zone.split('/').pop().replace(/_/g, ' ')
