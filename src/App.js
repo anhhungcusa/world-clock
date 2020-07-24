@@ -27,15 +27,14 @@ function App() {
             closable={true}
             visible={isVisibleClockPanel}
             onClose={closePanel}
-            placement='top'
+          placement='top'
           >
             <ClockPanel />
           </Drawer>
-          <ClockList openPanel={openPanel} />          
+          <ClockList openPanel={openPanel} />
         </div>
       </DataProvider>
     </div>
   )
 }
-
-export default Appdw
+export default App
